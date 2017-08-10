@@ -1,5 +1,4 @@
-import axios from 'axios'
-import fetch from 'isomorphic-fetch'
+// import fetch from 'isomorphic-fetch'
 /**
  * action types
  */
@@ -43,21 +42,16 @@ export function receiveBitcoin(bitcoin) {
 }
 
 function teste() {
-    dispatch => {
-        dispatch(loading)
-
-        console.log('sdasdasd')
+    return dispatch => {
+        dispatch(loading())
         return fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,BRL')
             .then(response => response.json())
-            .then(r=>dispatch(receiveBitcoin(r.BTC.BRL)))
-    }
-
+            .then(result => dispatch(receiveBitcoin(result.BTC.BRL)));
+    };
 }
-export function fetchTodos(){
-    return (dispatch, getState) => {
-        return dispatch(teste())
+
+export function fetchTodos() {
+    return dispatch => {
+        dispatch(teste())
     }
-    // return axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,BRL')
-    // .then(response => dispatch(receiveBitcoin((1.0000 / response.data.BTC.BRL) * 1000000))) 
-    // return {type: 'LOADING' }
 }

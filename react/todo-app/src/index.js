@@ -32,7 +32,7 @@ let store =configureStore(); // createStore(todoApp)
 console.log(store.getState())
 
 let unsubscribe = store.subscribe(() => {
-    console.log(store.getState())
+    //console.log(store.getState())
 })
 
 // store.dispatch(addTodo("Learn about actions"))

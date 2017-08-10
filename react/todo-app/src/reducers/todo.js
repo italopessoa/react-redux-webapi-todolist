@@ -35,10 +35,10 @@ function todos(state = [], action) {
                     return todo
                 })
             case 'GET_TODOS':
-                console.log(action)
+                //console.log(action)
                 return state;
             case 'LOADING':
-                console.log('loading todos')
+                console.log('loading todos')    
                 // console.log(action.bitcoin)
                 return state;
             case 'BITCOIN':
