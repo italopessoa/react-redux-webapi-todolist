@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TodoAPI.Models;
+using Microsoft.AspNetCore.Cors;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 //https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?tabs=aspnet1x
@@ -11,6 +12,9 @@ using TodoAPI.Models;
 namespace TodoAPI.Controllers
 {
     [Route("api/[controller]")]
+    //[EnableCors("AllowSpecificOrigin")]
+    [EnableCors("MP")]
+    //[EnableCors(Or origins: "http://www.example.com", headers: "*", methods: "get,post")]
     public class TodoController : Controller
     {
         private readonly TodoContext _context;
@@ -25,9 +29,9 @@ namespace TodoAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TodoItem> GetAll()
+        public IActionResult GetAll()
         {
-            return _context.TodoItems.ToList();
+            return Ok(new { results = _context.TodoItems.ToList() });
         }
 
         [HttpGet("{id}", Name = "GetTodo")]

@@ -44,9 +44,10 @@ export function receiveBitcoin(bitcoin) {
 function teste() {
     return dispatch => {
         dispatch(loading())
-        return fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,BRL')
+        // return fetch('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC&tsyms=USD,BRL')
+        return fetch('http://localhost:58584/api/todo')
             .then(response => response.json())
-            .then(result => dispatch(receiveBitcoin(result.BTC.BRL)));
+            .then(result => dispatch(receiveBitcoin(result.results[0].name)));
     };
 }
 

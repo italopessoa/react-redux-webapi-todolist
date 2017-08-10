@@ -27,17 +27,27 @@ namespace TodoAPI
         {
             services.AddDbContext<TodoContext>(opt => opt.UseInMemoryDatabase());
 
+            services.AddCors(o=> o.AddPolicy("MP",builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            }));
             // Add framework services.
+            //services.AddCors();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            //app.UseCors("MP");
             //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             //loggerFactory.AddDebug();
 
             app.UseMvc();
+
+           // app.UseCors(
+           //    options => options.WithOrigins("http://localhost:3000").AllowAnyMethod()
+           //);
         }
     }
 }
